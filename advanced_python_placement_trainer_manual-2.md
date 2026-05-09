@@ -1240,19 +1240,24 @@ def spiral_order(matrix):
     result = []
 
     while top <= bottom and left <= right:
+
+        # Traverse top row
         for col in range(left, right + 1):
             result.append(matrix[top][col])
         top += 1
 
+        # Traverse right column
         for row in range(top, bottom + 1):
             result.append(matrix[row][right])
         right -= 1
 
+        # Traverse bottom row
         if top <= bottom:
             for col in range(right, left - 1, -1):
                 result.append(matrix[bottom][col])
             bottom -= 1
 
+        # Traverse left column
         if left <= right:
             for row in range(bottom, top - 1, -1):
                 result.append(matrix[row][left])
@@ -1260,12 +1265,22 @@ def spiral_order(matrix):
 
     return result
 
+
 rows = int(input("Enter number of rows: "))
 cols = int(input("Enter number of columns: "))
+
 matrix = []
 
+print("Enter the matrix row by row:")
+
 for _ in range(rows):
-    matrix.append(list(map(int, input().split())))
+    row = list(map(int, input().split()))
+
+    if len(row) != cols:
+        print(f"Please enter exactly {cols} numbers.")
+        exit()
+
+    matrix.append(row)
 
 print("Spiral order =", spiral_order(matrix))
 ```
